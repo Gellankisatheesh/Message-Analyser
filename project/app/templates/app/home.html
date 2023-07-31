@@ -1,0 +1,100 @@
+{% load static %}
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Message Form</title>
+    <style>
+        body {
+            background-image: url("{% static 'images/1.jpeg' %}");
+            background-repeat: no-repeat;
+            background-size: cover;
+            font-family: Arial, sans-serif;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+            margin: 0;
+        }
+        
+        .container {
+            width: 500px;
+            padding: 20px;
+            background-color: #fff;
+            border-radius: 5px;
+            box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+        }
+        
+        .form-group {
+            margin-bottom: 20px;
+        }
+        
+        label {
+            display: block;
+            font-weight: bold;
+            margin-bottom: 5px;
+        }
+        
+        textarea {
+            width: 95%;
+            height: 150px;  /* Adjust the height as desired */
+            padding: 10px;
+            border: 1px solid #ccc;
+            border-radius: 4px;
+            resize: vertical;
+            font-size: 16px;
+            outline: none;
+        }
+        
+        button[type="submit"] {
+            display: block;
+            width: 100%;
+            padding: 10px;
+            background-color: #4caf50;
+            color: #fff;
+            border: none;
+            border-radius: 4px;
+            cursor: pointer;
+            font-weight: bold;
+            font-size: 16px;
+            outline: none;
+        }
+        
+        button[type="submit"]:hover {
+            background-color: #45a049;
+        }
+        
+        h2 {
+            margin-top: 20px;
+            font-size: 18px;
+            font-weight: bold;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <form id="myForm" method="POST">
+            <div class="form-group">
+                {% csrf_token %}
+                <label for="message">Enter your message:</label><br>
+                <textarea id="message" name="message">{{message}}</textarea><br><br>
+            </div>
+            <button type="submit">Submit</button>
+        </form>
+        {% if prediction1 %}
+            <h2>LR Prediction: {{ prediction1 }}</h2>
+        {% endif %}
+
+        {% if prediction2 %}
+            <h2>DT Prediction: {{ prediction2 }}</h2>
+        {% endif %}
+
+        {% if prediction3 %}
+            <h2>GBC Prediction: {{ prediction3 }}</h2>
+        {% endif %}
+
+        {% if prediction4 %}
+            <h2>RFC Prediction: {{ prediction4 }}</h2>
+        {% endif %}
+    </div>
+</body>
+</html>
